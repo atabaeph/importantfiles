@@ -1,0 +1,54 @@
+	git log --oneline
+
+delete file
+	git rm file1
+if file staged:
+	git rm -f file1
+move file to untracked:
+	git rm --cached file1
+ 
+
+rename file
+	git mv file1 newfile1
+
+
+change last commit. add newfiles or edited files to last commit
+	git commit --ammend
+
+
+remote repository
+	mkdir newRepo
+	cd newRepo
+	git init
+	git remote  #show remote repositories	
+	git remote add origin git@github.com:atabaeph/test.git
+	git remote -v 
+	git pull origin master #download
+	git push origin master
+	git remote show origin #info
+	git remote rename origin new_name
+
+
+add tag
+	git tag v1.1
+	git tag -a v1.2 -m "version 1.2" 
+	
+
+alias
+	git config --list   #show config aliases
+	git config --global alias.s "status"  # create alias "s" as a "status". git s == git status
+	git config --global --inset alias.s   #delete this alias
+
+
+branch
+	git branch  #list of branches
+	git branch newBranch
+	git branch -v  #list of branches with difference info
+	git checkout newBranch   #switch
+	git checkout -b secondBranch   # -b  add new branch and switch
+	git branch -D secondBranch   # -D force delete branch
+
+merge
+	git checkout -b testBranch  #add branch for merging testing
+	
+	
