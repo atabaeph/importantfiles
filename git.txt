@@ -47,8 +47,12 @@ branch
 	git checkout newBranch   #switch
 	git checkout -b secondBranch   # -b  add new branch and switch
 	git branch -D secondBranch   # -D force delete branch
+	git branch -r   # pulled remote branches
 
 merge
 	git checkout -b testBranch  #add branch for merging testing
-	
+	git merge testBranch
+
+
+remote branches
 	
