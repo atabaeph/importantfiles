@@ -1,4 +1,6 @@
 	git log --oneline
+	git log --oneline --graph
+	git add -i   #interactive 
 
 delete file
 	git rm file1
@@ -52,7 +54,24 @@ branch
 merge
 	git checkout -b testBranch  #add branch for merging testing
 	git merge testBranch
+	git merge --abort  #abort last merge
 
 
-remote branches
+logs
+	git reflog   #all 1 user history of actions (commits, checkouts, resets, etc.)
+	git show 09790   #show this commit
+	git show HEAD@{yesterday}^^
+ 	git show HEAD^^    
+
+search text in files
+	git grep text
+
+
+find out author of line who changed file
+	git blame file1   #show all lines
+	git blame -L 2 file1   # show from 2line
+
+
+
+
 	
