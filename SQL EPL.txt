@@ -1,0 +1,192 @@
+
+mysql>CREATE TABLE EPL (
+      id INT AUTO_INCREMENT, #auto filling id 
+      ...,
+      PRIMARY KEY (id) );
+
+mysql> INSERT INTO EPL VALUE (NULL,...);
+
+
+
+
+
+mysql> SELECT * FROM EPL;
++----+-------------------+--------+
+| id | club              | points |
++----+-------------------+--------+
+|  1 | Manchester City   |     74 |
+|  2 | Manchester United |     63 |
+|  2 | Leicester City    |     56 |
+|  2 | West Ham          |     55 |
+|  5 | Chelsea           |     54 |
+|  6 | Chelsea           |     52 |
+|  7 | Tottenham         |     49 |
++----+-------------------+--------+
+
+SELECT club FROM EPL WHERE club='Chelsea';
+SELECT club FROM EPL WHERE points>60;
+SELECT club FROM EPL WHERE club LIKE '%City'; #'%' skip all symbols before defined text
++-----------------+
+| club            |
++-----------------+
+| Manchester City |
+| Leicester City  |
++-----------------+
+
+SELECT club FROM EPL WHERE club LIKE '%ester%'; #'%' skip all symbols before and after defined text
++-------------------+
+| club              |
++-------------------+
+| Manchester City   |
+| Manchester United |
+| Leicester City    |
++-------------------+
+
+SELECT club FROM EPL WHERE club LIKE '_ancheste%'; # '_'skip one symbol
++-------------------+
+| club              |
++-------------------+
+| Manchester City   |
+| Manchester United |
++-------------------+
+
+mysql> SELECT club,points FROM EPL WHERE id=1 OR id=6;
++-----------------+--------+
+| club            | points |
++-----------------+--------+
+| Manchester City |     74 |
+| Chelsea         |     52 |
++-----------------+--------+
+
+
+mysql> SELECT club, points FROM EPL
+    -> WHERE points BETWEEN 56 AND 100;
++-------------------+--------+
+| club              | points |
++-------------------+--------+
+| Manchester City   |     74 |
+| Manchester United |     63 |
+| Leicester City    |     56 |
++-------------------+--------+
+
+mysql> SELECT club, points FROM EPL 
+       WHERE NOT points BETWEEN 56 AND 100; # NOT
++-----------+--------+
+| club      | points |
++-----------+--------+
+| West Ham  |     55 |
+| Chelsea   |     54 |
+| Chelsea   |     52 |
+| Tottenham |     49 |
++-----------+--------+
+
+mysql> SELECT club, points FROM EPL WHERE (id=1 OR id>5);
++-----------------+--------+
+| club            | points |
++-----------------+--------+
+| Manchester City |     74 |
+| Chelsea         |     52 |
+| Tottenham       |     49 |
++-----------------+--------+
+mysql> SELECT club, points FROM EPL WHERE (id=1 OR id>5) AND points>70; #
++-----------------+--------+
+| club            | points |
++-----------------+--------+
+| Manchester City |     74 |
++-----------------+--------+
+
+
+#delete row from table
+
+mysql> DELETE FROM EPL
+    -> WHERE id=2
+
+
+
+#change table
+ALTER TABLE table_name [actions];
+   [actions]:
+   ADD COLUMN field_name data_type atributes position;
+   ADD PRIMARY KEY(id);
+   DROP COLUMN field_name;
+   RENAME TO new_table_name;
+   CHANGE_COLUMN current_field_name new_fieldname data_type atributes/limiters;
+   MODIFY COLUMN field_name data_type;
+
+
+mysql> ALTER TABLE EPL
+    -> RENAME TO epl;
+
+mysql> ALTER TABLE epl
+    -> ADD COLUMN id INT AUTO_INCREMENT,
+    -> ADD PRIMARY KEY (id);
+
+
+mysql> select * from epl;
++---+-------------------+--------+------+------+
+| N | club              | points | won  | lost |
++---+-------------------+--------+------+------+
+| 1 | Manchester City   |     74 | NULL | NULL |
+| 2 | Manchester United |     63 | NULL | NULL |
+| 3 | Leicester City    |     56 | NULL | NULL |
+| 4 | West Ham          |     55 | NULL | NULL |
+| 5 | Chelsea           |     54 | NULL | NULL |
+| 6 | Liverpool         |     52 | NULL | NULL |
+| 7 | Tottenham         |     49 | NULL | NULL |
++---+-------------------+--------+------+------+
+
+
+#move fileds won and lost
+
+mysql> ALTER TABLE epl
+    -> MODIFY COLUMN lost INT NULL AFTER club,
+    -> MODIFY COLUMN won INT NULL AFTER club;
+mysql> select * from epl;
++---+-------------------+------+------+--------+
+| N | club              | won  | lost | points |
++---+-------------------+------+------+--------+
+| 1 | Manchester City   | NULL | NULL |     74 |
+| 2 | Manchester United | NULL | NULL |     63 |
+| 3 | Leicester City    | NULL | NULL |     56 |
+| 4 | West Ham          | NULL | NULL |     55 |
+| 5 | Chelsea           | NULL | NULL |     54 |
+| 6 | Liverpool         | NULL | NULL |     52 |
+| 7 | Tottenham         | NULL | NULL |     49 |
++---+-------------------+------+------+--------+
+
+
+#Functions
+
+
+mysql> SELECT UPPER(club) from epl;
++-------------------+
+| UPPER(club)       |
++-------------------+
+| MANCHESTER CITY   |
+| MANCHESTER UNITED |
+| LEICESTER CITY    |
+| WEST HAM          |
+| CHELSEA           |
+| LIVERPOOL         |
+| TOTTENHAM         |
++-------------------+
+
+add column tournament*
+mysql> UPDATE epl 
+    -> SET tournament = CASE 
+    -> WHEN N<=6 AND N>4 THEN 'Europe League' 
+    -> WHEN N<=4 THEN 'Champions League' 
+    -> END;
+mysql> select*from epl;
++---+-------------------+------+-------+------+--------+------------------+
+| N | club              | won  | drawn | lost | points | tournament       |
++---+-------------------+------+-------+------+--------+------------------+
+| 1 | Manchester City   | NULL |     0 | NULL |     74 | Champions League |
+| 2 | Manchester United | NULL |     0 | NULL |     63 | Champions League |
+| 3 | Leicester City    | NULL |     0 | NULL |     56 | Champions League |
+| 4 | West Ham          | NULL |     0 | NULL |     55 | Champions League |
+| 5 | Chelsea           | NULL |     0 | NULL |     54 | Europe League    |
+| 6 | Liverpool         | NULL |     0 | NULL |     52 | Europe League    |
+| 7 | Tottenham         | NULL |     0 | NULL |     49 | NULL             |
++---+-------------------+------+-------+------+--------+------------------+
+

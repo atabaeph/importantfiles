@@ -1,0 +1,115 @@
+
+DISKS
+
+Sda1 - main
+Sda2 - extended:
+   Sda5 - logical
+   Sda6 - logical
+Sda3 - main
+
+name Sda1 - Sda4 only for main and extended disks
+name Sda5+ can use for logical
+
+fdisk -l   #show all disks
+
+fdisk /etc/sda
+Command (m for help): m
+
+Command (m for help): n   #new partition
+
+
+PROCESSES
+
+> sleep 1000 &   #do sleep1000 in background
+> jobs
+[2]-  Running   sleep 1000 &
+> fg 2   #foreground job#2
+> bg 2   #background job#2
+
+> ps aux
+ps -eo user,pid,comm   #display only user pid and comm
+
+> kill -9 4325
+> killall sleep  #kill all proc sleep
+
+
+> top    
+
+> w   #show who is logged to system and what they are doing
+
+> uptime
+14:34:03 up 10:43,  4 users,  load average: 0.06, 0.11, 0.09
+#average system load value. there are 3 value: last 1min, last5min, last15min
+
+> free   #display amout of free and used memory in the system
+
+> screen   #open new terminal
+screen -S NameScreen         #give name to screen
+screen ctrl+a and d          #go to main terminal
+screen -r Id_or_NameScreen   #go to screen
+screen -ls                   #list of screens
+
+
+VI
+
+hjkl
+2 modes of work: Command and Insert
+in Command mode:
+e b - end and start word
+( ) - end and start sentence
+{ } - end and start
+^ $ - end and start row
+1G G - end and start of file
+
+yy - copy row
+yw - cope word
+yl - copy symbol
+dd - удалить и вырезать слово
+dw - удалить и вырезать символ
+p - paste
+
+/ - start search below
+? - start search above
+N n - continue search
+:e - undo changes
+:w - save changes  ":w newname"
+:q - quit from file
+:q! - quit wothout save
+:wq! - quit and save
+
+USERS
+
+useradd devops    #add simple user
+useradd -p password -s /bin/bash devops    #with password and shell
+useradd -G cdrom,wheel -p password -s /bin/bash devops   #with groups
+
+PERMISSIONS
+chown - change owner      #actually chown can do everything
+chgrp - change group owners
+chmod - change mode access
+
+id devops  #show user and group id
+
+chown devops:group_new file1
+chown -R devops Folder #change recursively owners in Folder (all will be devops)
+chown ugo+rwx file1
+or chown 777 file1
+
+
+LINK
+ln -s file1 file1_soft
+ln file1 file1_hard
+
+
+FIND
+grep - поиск по содержиомму
+find - поиск файлов по свойствам
+locate - бысьрый поиск файлов
+which - поиск команды
+type - вывод точной команды
+whereis - поиск команды, исходников и манула
+
+> find /home -name fileName
+> which ls  #show ls directory
+> locate dhcp
+> type ls   #
