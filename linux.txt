@@ -113,3 +113,55 @@ whereis - поиск команды, исходников и манула
 > which ls  #show ls directory
 > locate dhcp
 > type ls   #
+
+
+EXECUTING FILE, ENV
+> touch code
+#!/bin/bash
+date;
+> chmod +x code
+
+> $PATH=$PATH:/home/devops/   #add this directory find binary file and from any directory we can execute file 'code'
+> code
+
+
+BASH SCRIPT
+
+> 100 -gt 50 && echo "Yes" || echo "no"
+Yes
+> test 100 -gt 100 && echo "Yes" || echo "no"
+no
+
+
+
+#!/bin/bash
+if [condition]
+then
+  command
+else
+  command
+fi
+
+
+if [ -e /home/kuber ];
+then
+  echo "Found it"
+else
+  echo "No kuber directory in /home"
+fi
+
+
+echo "Are you hungry?"
+read VALUE
+if [ $VALUE = "YES" ]
+then
+  echo "Make some dinner"
+else
+  echo "Continue work motha fackka"
+fi
+
+
+x = $(date)
+y = 'uptime -p'
+echo "Today is $x and we are $y
+
