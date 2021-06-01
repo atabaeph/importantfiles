@@ -64,7 +64,7 @@ e b - end and start word
 yy - copy row
 yw - cope word
 yl - copy symbol
-dd - удалить и вырезать слово
+dd - удалить и вырезать строку
 dw - удалить и вырезать символ
 p - paste
 
@@ -82,6 +82,8 @@ USERS
 useradd devops    #add simple user
 useradd -p password -s /bin/bash devops    #with password and shell
 useradd -G cdrom,wheel -p password -s /bin/bash devops   #with groups
+
+usermod -s /bin/bash username   #change bash for user
 
 PERMISSIONS
 chown - change owner      #actually chown can do everything

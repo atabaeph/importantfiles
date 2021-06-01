@@ -1,4 +1,4 @@
-	git log --oneline
+	git log --oneline   #show log history in oneline
 	git log --oneline --graph
 	git add -i   #interactive 
 
